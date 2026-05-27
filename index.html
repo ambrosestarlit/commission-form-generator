@@ -14,7 +14,6 @@
       --text: #263544;
       --muted: #6f8190;
       --border: #cfe3f5;
-      --danger: #f06f8f;
       --shadow: 0 18px 45px rgba(65, 118, 161, 0.16);
       --radius: 22px;
     }
@@ -94,7 +93,9 @@
 
     select,
     textarea,
-    input[type="date"] {
+    input[type="date"],
+    input[type="url"],
+    input[type="text"] {
       width: 100%;
       border: 1px solid var(--border);
       border-radius: 16px;
@@ -106,7 +107,9 @@
     }
 
     select,
-    input[type="date"] {
+    input[type="date"],
+    input[type="url"],
+    input[type="text"] {
       height: 48px;
       padding: 0 14px;
     }
@@ -120,7 +123,9 @@
 
     select:focus,
     textarea:focus,
-    input[type="date"]:focus {
+    input[type="date"]:focus,
+    input[type="url"]:focus,
+    input[type="text"]:focus {
       border-color: var(--main);
       box-shadow: 0 0 0 4px rgba(107, 168, 216, 0.18);
     }
@@ -297,6 +302,14 @@
         </div>
 
         <div class="section">
+          <label for="postUrl">【依頼募集ポストURL】</label>
+          <div class="note">
+            <p>※該当する依頼募集ポストのURLを貼ってください。</p>
+          </div>
+          <input type="url" id="postUrl" placeholder="https://x.com/..." />
+        </div>
+
+        <div class="section">
           <label for="designMaterial">【デザインの資料】</label>
           <div class="note">
             <p>※ビジュアルがすでにある方は、ラフではなく確定資料をご提出ください。（立ち絵や三面図など）</p>
@@ -353,6 +366,7 @@
 
   <script>
     const requestType = document.getElementById("requestType");
+    const postUrl = document.getElementById("postUrl");
     const designMaterial = document.getElementById("designMaterial");
     const requestDetail = document.getElementById("requestDetail");
     const date1 = document.getElementById("date1");
@@ -365,6 +379,7 @@
 
     const fields = [
       requestType,
+      postUrl,
       designMaterial,
       requestDetail,
       date1,
@@ -381,6 +396,9 @@
     function buildText() {
       return `【依頼したいもの】
 ${requestType.value}
+
+【依頼募集ポストURL】
+${postUrl.value.trim()}
 
 【デザイン資料】
 ${designMaterial.value.trim()}
